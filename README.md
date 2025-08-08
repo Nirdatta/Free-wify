@@ -80,13 +80,6 @@
     margin-top: 20px;
     display: none;
   }
-  #counter {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-top: 25px;
-    color: #fff;
-    text-shadow: 0 0 8px #28a745;
-  }
 </style>
 </head>
 <body>
@@ -102,7 +95,6 @@
   </div>
   <div id="lyrics"></div>
   <h2 id="fregato">SEI STATO FREGATO 😂</h2>
-  <div id="counter">👀 Visite totali: caricamento...</div>
 </div>
 
 <audio id="song" src="https://files.catbox.moe/8n2b7m.mp3" preload="auto"></audio>
@@ -113,31 +105,9 @@
   const loadingBars = document.getElementById('loading-bars');
   const lyrics = document.getElementById('lyrics');
   const fregato = document.getElementById('fregato');
-  const counter = document.getElementById('counter');
   const song = document.getElementById('song');
 
   const testo = `Pensavi di essere un Wi-Fi a pagamento… invece 😏`;
-
-  const NAMESPACE = "prova123";
-  const KEY = "contatore";
-
-  // Incrementa e aggiorna contatore visite appena la pagina viene aperta
-  function aggiornaVisite() {
-    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data && typeof data.value === 'number') {
-          counter.textContent = `👀 Visite totali: ${data.value}`;
-        } else {
-          counter.textContent = `👀 Visite totali: 0`;
-        }
-      })
-      .catch(() => {
-        counter.textContent = `👀 Visite totali: 0`;
-      });
-  }
-
-  aggiornaVisite();
 
   wifiBtn.addEventListener('click', () => {
     wifiBtn.style.display = 'none';
@@ -155,8 +125,8 @@
     }, 5000);
   });
 </script>
-<!-- Default Statcounter code for Free wify
-https://nirdatta.github.io/Free-wify/ -->
+
+<!-- Default Statcounter code for Free wify -->
 <script type="text/javascript">
 var sc_project=13157660; 
 var sc_invisible=0; 
