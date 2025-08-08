@@ -1,91 +1,80 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Connessione Wi-Fi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wi-Fi Scherzo</title>
 <style>
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: #fff;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
     margin: 0;
   }
   #container {
-    background: rgba(0,0,0,0.7);
-    padding: 30px 40px;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 0 15px #0f9;
-    width: 90%;
     max-width: 400px;
-    text-align: center;
   }
   #wifi {
-    font-size: 2em;
+    font-size: 1.5em;
     background: #28a745;
-    padding: 20px;
-    border-radius: 12px;
+    padding: 15px 25px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s ease;
     box-shadow: 0 0 10px #28a745;
     display: inline-block;
   }
   #wifi:hover {
     background: #218838;
-    box-shadow: 0 0 20px #1e7e34;
   }
   #status {
     margin-top: 20px;
-    font-size: 1.2em;
-    min-height: 40px;
+    min-height: 20px;
   }
   #loading-bars {
     margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 6px;
     display: none;
+    justify-content: center;
+    gap: 5px;
   }
   .bar {
     width: 8px;
     height: 25px;
     background: #28a745;
-    border-radius: 4px;
-    animation: loading 1.2s infinite ease-in-out;
+    animation: loading 1s infinite ease-in-out;
   }
   .bar:nth-child(2) { animation-delay: 0.2s; }
   .bar:nth-child(3) { animation-delay: 0.4s; }
   .bar:nth-child(4) { animation-delay: 0.6s; }
   .bar:nth-child(5) { animation-delay: 0.8s; }
   @keyframes loading {
-    0%, 40%, 100% { transform: scaleY(0.4); opacity: 0.6; }
-    20% { transform: scaleY(1); opacity: 1; }
+    0%, 40%, 100% { transform: scaleY(0.4); }
+    20% { transform: scaleY(1); }
   }
   #lyrics {
-    white-space: pre-wrap;
-    margin-top: 25px;
-    background: rgba(255 255 255 / 0.1);
-    padding: 20px;
-    border-radius: 12px;
-    font-size: 1.1em;
     display: none;
+    margin-top: 20px;
+    white-space: pre-wrap;
   }
   #fregato {
-    color: #ff4444;
-    font-size: 2em;
-    margin-top: 20px;
     display: none;
+    color: red;
+    font-size: 1.5em;
+    margin-top: 15px;
   }
   #counter {
-    font-size: 1.1em;
+    margin-top: 20px;
     font-weight: bold;
-    margin-top: 25px;
-    color: #fff;
-    text-shadow: 0 0 8px #28a745;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px #28a745;
   }
 </style>
 </head>
@@ -118,15 +107,26 @@
 
   const testo = `Pensavi di essere un Wi-Fi a pagamento… invece 😏`;
 
-  // 📌 Aggiorna contatore all'apertura della pagina
-  fetch('https://api.countapi.xyz/hit/wifi-scherzo/visite')
-    .then(res => res.json())
-    .then(data => {
-      counter.textContent = `👀 Visite totali: ${data.value}`;
-    })
-    .catch(() => {
-      counter.textContent = 'Errore caricamento visite';
-    });
+  const NAMESPACE = "wifi-scherzo";
+  const KEY = "visite";
+
+  // Aggiorna contatore all'apertura della pagina
+  function aggiornaVisite() {
+    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.value !== undefined) {
+          counter.textContent = `👀 Visite totali: ${data.value}`;
+        } else {
+          counter.textContent = `👀 Visite totali: 0`;
+        }
+      })
+      .catch(() => {
+        counter.textContent = `👀 Visite totali: 0`;
+      });
+  }
+
+  aggiornaVisite();
 
   wifiBtn.addEventListener('click', () => {
     wifiBtn.style.display = 'none';
@@ -136,13 +136,9 @@
     setTimeout(() => {
       statusEl.textContent = '';
       loadingBars.style.display = 'none';
-
       lyrics.style.display = 'block';
       lyrics.textContent = testo;
-
       fregato.style.display = 'block';
-
-      song.volume = 1.0;
       song.play();
     }, 5000);
   });
