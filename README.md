@@ -154,7 +154,8 @@
       song.play();
     }, 5000);
   });
-</script><!-- Default Statcounter code for Free wify
+</script>
+<!-- Default Statcounter code for Free wify
 https://nirdatta.github.io/Free-wify/ -->
 <script type="text/javascript">
 var sc_project=13157660; 
@@ -164,10 +165,9 @@ var scJsHost = "https://";
 document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
 "statcounter.com/counter/counter.js'></"+"script>");
 </script>
-<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
-Statcounter" href="https://statcounter.com/" target="_blank"><img
-class="statcounter" src="https://c.statcounter.com/13157660/0/be4233ad/0/"
-alt="Web Analytics Made Easy - Statcounter"
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/13157660/0/be4233ad/0/" alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
 </body>
